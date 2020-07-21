@@ -23,9 +23,9 @@ if [ ! "$(printf '%s\n' "$REQUIRED_SWIFT_TOOLING" "$TOOLS_VERSION" | sort -V | h
     exit 1
 fi
 
-swift package generate-xcodeproj
-echo "Fixing bundle identifier and bundle version in generated xcodeproj..."
-ruby Helpers/fix_project.rb RxCombine.xcodeproj
+swift package generate-xcodeproj --xcconfig-overrides Config.xcconfig
+#echo "Fixing bundle identifier and bundle version in generated xcodeproj..."
+#ruby Helpers/fix_project.rb RxCombine.xcodeproj
 carthage build --no-skip-current
 carthage archive
 
